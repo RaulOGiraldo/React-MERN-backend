@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const { dbConnection } = require('./database/config');
 const cors = require('cors');
@@ -25,6 +26,9 @@ app.use('/api/auth', require('./routes/auth') );
 // TODO: CRUD: Eventos
 app.use('/api/events', require('./routes/events') );
 
+app.use( '*', ( reg, res ) => {
+    res.sendFile( path.join( __dirname, 'public/index.html') )
+});
 
 // Escuchar paticiones
 app.listen( process.env.PORT, () => {
